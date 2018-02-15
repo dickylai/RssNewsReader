@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "webpack": "webpack --watch",
-    "start": "NODE_ENV=production && node ./bin/www",
-    "devstart": "NODE_ENV=dev && npm run webpack & nodemon --exec babel-node -- bin/www",
-    "test:server": "NODE_ENV=test && mocha server --recursive",
+    "webpack":            "webpack",
+    "start":              "NODE_ENV=production && webpack && node ./bin/www",
+    "dev-start":          "NODE_ENV=dev && webpack --watch & nodemon --exec babel-node -- bin/www",
+    "test:server":        "NODE_ENV=test && mocha server/tests --recursive --exit",
+    "test:server-watch":  "NODE_ENV=test && mocha server/tests --recursive --exit --watch",
+    "test:app":           "NODE_ENV=test && mocha --require ./app/tests/testHelper.js app/tests --recursive",
+    "test:app-watch":     "NODE_ENV=test && mocha --require ./app/tests/testHelper.js app/tests --recursive --watch --watch-extensions jsx"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -24,7 +27,9 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.0.0",
+    "jsdom": "^11.6.2",
+    "mocha": "^5.0.1",
+    "react-addons-test-utils": "^15.6.2",
     "sinon": "^4.3.0",
     "supertest": "^3.0.0"
   }
