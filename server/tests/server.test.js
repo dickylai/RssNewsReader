@@ -2,7 +2,7 @@ var chai = require('chai');
 var sinon = require('sinon');
 var expect = chai.expect;
 
-var app = require('./server');
+var app = require('../server');
 var request = require('supertest')(app);
 var ejs = require('ejs');
 
