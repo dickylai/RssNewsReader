@@ -6,7 +6,7 @@ import '../../styles/styles.css';
 class NewsPanel extends Component {
   render() {
     return (
-      <div style="inlineContainer">
+      <div className="inlineContainer">
         <NewsItem title="1"/>
         <NewsItem title="2"/>
         <NewsItem title="3"/>
