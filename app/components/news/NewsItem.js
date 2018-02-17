@@ -19,7 +19,7 @@ class NewsItem extends Component {
 }
 
 NewsItem.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string.isRequired
 };
 
 export default NewsItem;
