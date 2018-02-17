@@ -4,7 +4,7 @@ import NewsItem from "./NewsItem";
 class NewsPanel extends Component {
   render() {
     return (
-      <div>
+      <div style={{display:'inline-block'}}>
         <NewsItem title="1"/>
         <NewsItem title="2"/>
         <NewsItem title="3"/>

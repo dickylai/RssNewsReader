@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class FilterPanel extends Component {
   render() {
     return (
-      <div>
+      <div style={{display:'inline-block'}}>
         <p>This is FilterPanel</p>
       </div>
     );
