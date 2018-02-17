@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import '../../styles/searchPanel.css';
 
 class SearchPanel extends Component {
   render() {
     return (
-      <div style={{display: 'inline-block'}}>
-        <p>This is the SearchPanel.</p>
+      <div className="panel">
+        <input className="searchBar" placeholder="Input here to search..."/>
       </div>
     );
   }
