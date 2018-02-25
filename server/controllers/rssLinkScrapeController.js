@@ -6,7 +6,6 @@ var rssLinkScrapeController = (models) => {
   var getLinksFromPage = (page, callback) => {
     var links = [];
     var url = page.link;
-    console.log(page.media);
     request(url, (err, response, html) => {
       if (err) {
         console.log('Cannot get the rss page: ' + url);
@@ -24,10 +23,25 @@ var rssLinkScrapeController = (models) => {
     });
   };
 
+  var saveLinkToDb = (link, callback) => {
+    models.rssLinkModel.findOneAndUpdate(
+      {link: link.link},
+      link,
+      {upsert: true},
+      (err, link) => callback(err, !link)
+    );
+  };
+
   var saveLinksToDb = (links, callback) => {
-    models.rssLinkModel.collection.insert(links, {ordered:false}, (err) => {
-      callback(err);
-    })
+    var linksAdded = 0;
+    var linksProcessed = 0;
+    links.forEach((link, index, array) => {
+      saveLinkToDb(link, (err, isNew) => {
+        if (err) return callback(err, linksAdded);
+        if (isNew) linksAdded++;
+        if(++linksProcessed === array.length) callback(null, linksAdded);
+      });
+    });
   };
 
   var scrapeLinks = (req, res) => {
@@ -38,9 +52,13 @@ var rssLinkScrapeController = (models) => {
       pages.forEach((page, index, array) => {
         getLinksFromPage(page, (scrapeErr, links) => {
           if (scrapeErr) return res.status(500).send(scrapeErr);
-          saveLinksToDb(links, (saveErr) => {
+          saveLinksToDb(links, (saveErr, linksAdded) => {
             if (saveErr) return res.status(500).send(saveErr);
-            res.json({success: true});
+            var response = {
+              success: true,
+              linksAdded: linksAdded
+            };
+            res.json(response);
           });
         });
       });
