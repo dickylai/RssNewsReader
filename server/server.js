@@ -9,7 +9,6 @@ var db = mongoose.connect('mongodb://localhost/rssReader', err => {
 });
 
 var apiRouter = require('./routes/api/apiRouter');
-var adminRouter = require('./routes/api/adminRouter');
 var frontendRouter = require('./routes/frontend/frontendRouter');
 
 var app = express();
@@ -21,7 +20,6 @@ app.use(express.static(path.join(__dirname, '../app')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/api/admin/', adminRouter);
 app.use('/api/', apiRouter);
 app.use('/', frontendRouter);
 
