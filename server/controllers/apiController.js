@@ -1,11 +1,8 @@
 var apiController = (models) => {
   var getAll = (res, model) => {
     model.find({}, (err, records) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.json(records);
-      }
+      if (err) return res.status(500).send(err);
+      res.json(records);
     });
   };
 
@@ -22,11 +19,8 @@ var apiController = (models) => {
     .populate('media')
     .populate('categories')
     .exec((err, records) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.json(records);
-      }
+      if (err) return res.status(500).send(err);
+      res.json(records);
     });
   };
 
