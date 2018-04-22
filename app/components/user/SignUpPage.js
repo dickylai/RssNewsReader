@@ -6,10 +6,11 @@ import { connect } from 'react-redux';
 import Message from './Message';
 import { signUpRequest } from '../../actions/signUpActions';
 
-class SignUpPanel extends Component {
+class SignUpPage extends Component {
 
   render() {
     const {
+      signUpRequest,
       handleSubmit,
       signUp: {
         requesting,
@@ -21,7 +22,7 @@ class SignUpPanel extends Component {
 
     return (
       <div className="row mt-3">
-        <form className="offset-3 col-6 border" onSubmit={handleSubmit(this.props.signUpRequest)}>
+        <form className="offset-3 col-6 border" onSubmit={handleSubmit(signUpRequest)}>
           <legend className="my-3">RSS News Reader - Sign Up</legend>
           <div>
             {!requesting && !!errors.length &&
@@ -45,7 +46,6 @@ class SignUpPanel extends Component {
               className="form-control"
               label="Email"
               component="input"
-              value="135"
             />
           </div>
           <div className="form-group">
@@ -57,7 +57,6 @@ class SignUpPanel extends Component {
               className="form-control"
               label="password"
               component="input"
-              value="135"
             />
           </div>
           <div className="form-group">
@@ -69,7 +68,6 @@ class SignUpPanel extends Component {
               className="form-control"
               label="confirmPassword"
               component="input"
-              value="135"
             />
           </div>
           <button action="submit" className="btn btn-primary mb-3">SIGNUP</button>
@@ -79,7 +77,7 @@ class SignUpPanel extends Component {
   };
 }
 
-SignUpPanel.propTypes = {
+SignUpPage.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   signUpRequest: PropTypes.func.isRequired,
   signUp: PropTypes.shape({
@@ -94,7 +92,7 @@ const mapStateToProps = state => ({
   signUp: state.signUp
 });
 
-const connected = connect(mapStateToProps, { signUpRequest })(SignUpPanel);
+const connected = connect(mapStateToProps, { signUpRequest })(SignUpPage);
 const formed = reduxForm({
   form: 'signUpForm'
 })(connected);

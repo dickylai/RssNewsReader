@@ -1,5 +1,5 @@
 import { reducer as form } from 'redux-form';
-import { SIGNUP } from '../actions/actionConstants';
+import { LOGIN, SIGNUP } from '../actions/actionConstants';
 
 const formReducer = form.plugin({
   signUpForm: (state, action) => {
@@ -33,6 +33,19 @@ const formReducer = form.plugin({
               ...state.fields,
               password: undefined,
               confirmPassword: undefined
+            }
+        };
+      }
+      case LOGIN.ERROR: {
+        return {
+          ...state,
+            values: {
+              ...state.values,
+              password: undefined,
+            },
+            fields: {
+              ...state.fields,
+              password: undefined,
             }
         };
       }
