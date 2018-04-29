@@ -22,3 +22,4 @@ yarn-error.log*
 
 app/bundle.js
 package-lock.json
+server/properties/properties.js
