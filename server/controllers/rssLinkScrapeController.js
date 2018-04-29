@@ -45,6 +45,7 @@ var rssLinkScrapeController = (models) => {
   };
 
   var scrapeLinks = (req, res) => {
+    console.log("Start handling scrape links request...");
     models.rssPageModel.find({})
     .populate('media')
     .exec((findErr, pages) => {
@@ -58,6 +59,7 @@ var rssLinkScrapeController = (models) => {
               success: true,
               linksAdded: linksAdded
             };
+            console.log("Handled scrape links request.");
             res.json(response);
           });
         });

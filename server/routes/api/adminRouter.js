@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var models = require('../../models/models');
-var rssLinkScrapeController = require('../../controllers/rssLinkScrapeController')(models);
+var adminRouter = (models, loginRequired) => {
+  var rssLinkScrapeController = require('../../controllers/rssLinkScrapeController')(models);
 
-router.route('/rssLinks/scrape').get(rssLinkScrapeController.scrapeLinks);
+  router.use(loginRequired);
+  router.route('/rssLinks/scrape').get(rssLinkScrapeController.scrapeLinks);
 
-module.exports = router;
+  return router;
+}
+
+module.exports = adminRouter;
